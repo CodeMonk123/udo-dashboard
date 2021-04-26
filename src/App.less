@@ -7,3 +7,17 @@ body,
   margin: 0;
   padding: 0;
 }
+
+.App {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  box-sizing: border-box;
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+
+  > * {
+    background-color: rgba(2, 2, 2, 0.062);
+    box-shadow: 0px 0px 5px 1px rgba(2, 2, 2, 0.199);
+  }
+}
