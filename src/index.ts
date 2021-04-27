@@ -2,11 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import App from './App'
-import fetchData from './utils/Fetch'
+import FetchData from './utils/Fetch'
+
+function callback(timestamp, value, key){
+    console.log(timestamp, value, key)
+}
 
 function render() {
-
-    fetchData('Air_purifier_123_Humidity')
+    FetchData('Air_purifier_123_Humidity', callback)
+    FetchData('Air_purifier_123_Temperature', callback)
+    FetchData('Air_purifier_123_Aqi', callback)
 
     ReactDOM.render(
         React.createElement(AppContainer, {}, React.createElement(App)),
