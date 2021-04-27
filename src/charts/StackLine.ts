@@ -1,6 +1,4 @@
 import { EChartsOption } from 'echarts'
-import { Listen } from '@/components/XCharts/listen'
-import { fetchData } from '@/requests'
 
 export default {
   title: {
@@ -31,7 +29,7 @@ export default {
       name: '邮件营销',
       type: 'line',
       stack: '总量',
-      data: Listen(() => fetchData('/mock/data'), 2000),
+      data: [220, 182, 191, 234, 290, 330, 310],
     },
     {
       name: '联盟广告',
