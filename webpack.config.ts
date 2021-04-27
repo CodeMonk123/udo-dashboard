@@ -1,6 +1,7 @@
 import { Configuration, ProvidePlugin } from 'webpack'
 import { resolve } from 'path'
 import HTMLWebpackPlugin from 'html-webpack-plugin'
+import Mock from './mock'
 
 export default {
   mode: 'development',
@@ -44,10 +45,8 @@ export default {
               importLoaders: 1,
             },
           },
-
         ],
       },
-
     ],
   },
 
@@ -81,5 +80,6 @@ export default {
       version: false,
       warnings: false,
     },
+    before: Mock,
   },
 } as Configuration

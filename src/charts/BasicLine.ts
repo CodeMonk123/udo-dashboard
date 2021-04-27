@@ -1,3 +1,7 @@
+import { EChartsOption } from 'echarts'
+import { Listen } from '@/components/XCharts/listen'
+import { fetchData } from '@/requests'
+
 export default {
   xAxis: {
     type: 'category',
@@ -8,8 +12,9 @@ export default {
   },
   series: [
     {
-      data: [150, 230, 224, 218, 135, 147, 260],
+      data: Listen(() => fetchData('/mock/data'), 2000),
       type: 'line',
     },
   ],
-}
+  animation: true,
+} as EChartsOption

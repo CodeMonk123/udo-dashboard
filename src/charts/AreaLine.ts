@@ -1,3 +1,5 @@
+import { EChartsOption } from 'echarts'
+
 export default {
   xAxis: {
     type: 'category',
@@ -14,4 +16,4 @@ export default {
       areaStyle: {},
     },
   ],
-}
+} as EChartsOption

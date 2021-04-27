@@ -1,3 +1,5 @@
+import { EChartsOption } from 'echarts'
+
 export default {
   xAxis: {
     type: 'category',
@@ -13,4 +15,4 @@ export default {
       smooth: true,
     },
   ],
-}
+} as EChartsOption

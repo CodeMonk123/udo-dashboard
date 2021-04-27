@@ -1,8 +1,10 @@
 import { CSSProperties, useEffect, useRef } from 'react'
-import { init, ECharts } from 'echarts'
+import { init, ECharts, EChartsOption } from 'echarts'
+import ResizeHandlerFactory from './resize'
+import ListenDataSource from './listen'
 
 interface Props {
-  option: any
+  option: EChartsOption
   style?: CSSProperties
   className?: string
   theme?: string
@@ -23,45 +25,9 @@ export default function XCharts({
     // 初始化 echarts 实例
     echartsRef.current = init(containerRef.current, theme, configuration)
 
-    // 获取 div 容器初始尺寸
-    const {
-      width: initialWidth,
-      height: initialHeight,
-    } = containerRef.current.getBoundingClientRect()
-
-    // resize 事件节流指示器
-    const indicator = {
-      enabled: true,
-      lastWidth: initialWidth,
-      lastHeight: initialHeight,
-    }
-
-    function resizeHandler() {
-      if (!indicator.enabled) return
-
-      indicator.enabled = false
-
-      const { width, height } = containerRef.current.getBoundingClientRect()
-
-      if (
-        Math.abs(indicator.lastWidth - width) > 0.5 ||
-        Math.abs(indicator.lastHeight - height) > 0.5
-      ) {
-        indicator.lastWidth = width
-        indicator.lastHeight = height
-
-        echartsRef.current.resize({
-          width,
-          height,
-        })
-      }
-
-      setTimeout(() => {
-        indicator.enabled = true
-      }, 250)
-    }
-
+    const resizeHandler = ResizeHandlerFactory(containerRef, echartsRef)
     window.addEventListener('resize', resizeHandler)
+
     return () => {
       window.removeEventListener('resize', resizeHandler)
       echartsRef.current.dispose()
@@ -69,7 +35,9 @@ export default function XCharts({
   }, [])
 
   useEffect(() => {
-    echartsRef.current.setOption(option)
+    const clear = ListenDataSource(echartsRef, option)
+
+    return clear
   }, [option])
 
   return (

@@ -1,3 +1,7 @@
+import { EChartsOption } from 'echarts'
+import { Listen } from '@/components/XCharts/listen'
+import { fetchData } from '@/requests'
+
 export default {
   title: {
     text: '折线图堆叠',
@@ -27,7 +31,7 @@ export default {
       name: '邮件营销',
       type: 'line',
       stack: '总量',
-      data: [120, 132, 101, 134, 90, 230, 210],
+      data: Listen(() => fetchData('/mock/data'), 2000),
     },
     {
       name: '联盟广告',
@@ -54,4 +58,4 @@ export default {
       data: [820, 932, 901, 934, 1290, 1330, 1320],
     },
   ],
-}
+} as EChartsOption
