@@ -1,6 +1,6 @@
 import { EChartsOption } from 'echarts'
 import AreaLine from './AreaLine'
-import BasicLine from './BasicLine'
+import temperature from './TemperatureChart'
 import SmoothLine from './SmoothLine'
 import StackLine from './StackLine'
 
@@ -13,7 +13,7 @@ interface ChartConfig {
 export default [
   {
     grid: '1/1/7/21',
-    option: SmoothLine,
+    option: temperature,
   },
   {
     grid: '7/1/14/21',
