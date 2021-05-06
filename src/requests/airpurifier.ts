@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+
 const url = 'http://192.168.1.115:8000/api/documents/query'
 
 /* Fetch data.
@@ -7,14 +9,12 @@ const url = 'http://192.168.1.115:8000/api/documents/query'
  *   null or float
  */
 async function FetchData(key) {
-  var endTime = new Date(Date.now()).toISOString()
-  var startTime = new Date(Date.now() - 6000).toISOString()
-
-  var queryBody = `
+  const currentTime = dayjs()
+  const queryBody = `
         {
             Air_purifierMeters(
-                start : "${startTime}",
-                end : "${endTime}",
+                start : "${currentTime.subtract(6, 's').toISOString()}",
+                end : "${currentTime.toISOString()}",
                 step : "5s",
                 query : "${key}"
             ){
@@ -32,13 +32,17 @@ async function FetchData(key) {
     .then(text => {
       const tokens = text.split('values=')
       const results = Array(JSON.parse(tokens[1].slice(0, -6)))
-      var val = null
-      if (results.length > 0) {
-        val = results[0][0][1]
-      }
+      // var val = null
+      // if (results.length > 0) {
+      //   val = results[0][0][1]
+      // }
 
-      return val
+      // return val
+
+      return results.length ? results[0][0][1] : null
     })
 }
 
-export default FetchData
+export default {
+  fetch: FetchData,
+}

@@ -1,9 +1,9 @@
 import { Listen } from '@/components/XCharts/listen'
 import { airpurifier } from '@/requests'
-import { SmoothLine } from '@/factories'
+import { AreaLine } from '@/factories'
 
 export default Listen(
-  SmoothLine('空气湿度'),
+  AreaLine('空气质量指数'),
   async (prev: any) => {
     console.log(prev)
 
@@ -12,7 +12,7 @@ export default Listen(
     let seriesData: number[] = prev.series[0].data
 
     const currentTime = new Date(Date.now()).toTimeString().slice(0, 9)
-    let value = await airpurifier.fetch('Air_purifier_123_Humidity')
+    let value = await airpurifier.fetch('Air_purifier_123_Aqi')
 
     prevXAxis.push(currentTime)
     seriesData.push(value)

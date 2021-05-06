@@ -1,14 +1,12 @@
 import { EChartsOption } from 'echarts'
-import AreaLine from './AreaLine'
 import temperature from './TemperatureChart'
-import SmoothLine from './SmoothLine'
-import StackLine from './StackLine'
+import humidity from './HumidityChart'
+import aqi from './AQIChart'
 
 interface ChartConfig {
   grid: string
   option: EChartsOption
 }
-
 
 export default [
   {
@@ -17,10 +15,10 @@ export default [
   },
   {
     grid: '7/1/14/21',
-    option: SmoothLine,
+    option: humidity,
   },
   {
     grid: '14/1/21/21',
-    option: AreaLine,
+    option: aqi,
   },
 ] as ChartConfig[]
