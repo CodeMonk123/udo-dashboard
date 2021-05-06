@@ -1,5 +1,5 @@
 
-const url = 'http://192.168.1.123:8000/api/documents/query'
+const url = 'http://192.168.1.115:8000/api/documents/query'
 
 /* Fetch data.
 * Params:
@@ -7,7 +7,7 @@ const url = 'http://192.168.1.123:8000/api/documents/query'
 * Return:
 *   null or float
 */ 
-function FetchData(key:string, callback){
+async function FetchData(key:string, callback){
 
     var endTime = new Date(Date.now()).toISOString();
     var startTime = new Date(Date.now() - 6000).toISOString();
@@ -26,23 +26,25 @@ function FetchData(key:string, callback){
         }
     `
     
-    fetch(url, {
+    let text = await fetch(url, {
         method: "POST",
         body: queryBody,
     }).then(res => {
         res.text().then(
-            function(text){
-                const tokens = text.split('values=')
-                const results = Array(JSON.parse(tokens[1].slice(0, -6)))
-                var val = null
-                if(results.length>0) {
-                    val = results[0][0][1]
-                } 
-                callback(new Date(Date.now()).toLocaleString(), val, key)
+            text => {
+                return text
             }
         )
-    })
+    });
 
+    const tokens = text.split('values=')
+    const results = Array(JSON.parse(tokens[1].slice(0, -6)))
+    var val = null
+    if(results.length>0) {
+        val = results[0][0][1]
+    } 
+
+    return val
 }
 
 export default FetchData

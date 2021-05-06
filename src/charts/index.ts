@@ -9,21 +9,18 @@ interface ChartConfig {
   option: EChartsOption
 }
 
+
 export default [
   {
-    grid: '1/1/11/11',
-    option: BasicLine,
-  },
-  {
-    grid: '1/11/11/21',
+    grid: '1/1/7/21',
     option: SmoothLine,
   },
   {
-    grid: '11/1/21/11',
-    option: AreaLine,
+    grid: '7/1/14/21',
+    option: SmoothLine,
   },
   {
-    grid: '11/11/21/21',
-    option: StackLine,
+    grid: '14/1/21/21',
+    option: AreaLine,
   },
 ] as ChartConfig[]
