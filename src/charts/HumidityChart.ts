@@ -14,12 +14,13 @@ const options:EChartsOption = {
     {
       data: [],
       type: 'line',
+      smooth: true,
     },
   ],
   animation: true,
 
   title : {
-    text : "室温(摄氏度)"
+    text : "空气湿度"
   }
 }
 
@@ -33,7 +34,7 @@ export default Listen(
     let seriesData:number[] = prev.series[0].data
     
     const currentTime = new Date(Date.now()).toTimeString().slice(0,9)
-    let value = await FetchData('Air_purifier_123_Temperature')
+    let value = await FetchData('Air_purifier_123_Humidity')
 
     prevXAxis.push(currentTime)
     seriesData.push(value)
