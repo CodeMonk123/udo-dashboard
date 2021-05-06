@@ -1,7 +1,7 @@
 import { CSSProperties, useEffect, useRef } from 'react'
 import { init, ECharts, EChartsOption } from 'echarts'
 import ResizeHandlerFactory from './resize'
-import ListenDataSource from './listen'
+import ListenOption from './listen'
 
 interface Props {
   option: EChartsOption
@@ -34,11 +34,7 @@ export default function XCharts({
     }
   }, [])
 
-  useEffect(() => {
-    const clear = ListenDataSource(echartsRef, option)
-
-    return clear
-  }, [option])
+  useEffect(() => ListenOption(echartsRef, option), [option])
 
   return (
     <div className={'XCharts ' + className} style={style} ref={containerRef} />

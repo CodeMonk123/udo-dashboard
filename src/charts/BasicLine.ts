@@ -1,23 +1,49 @@
-import { EChartsOption } from 'echarts'
 import { Listen } from '@/components/XCharts/listen'
-import { fetchData } from '@/requests'
 
-export default {
-  xAxis: {
-    type: 'category',
-    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-  },
-  yAxis: {
-    type: 'value',
-  },
-  series: [
-    {
-      data: Listen((prev) => {
-        console.log(prev)
-        return [150, 230, 224, 218, 135, 147, 260]
-      }, 2000),
-      type: 'line',
+export default Listen(
+  {
+    xAxis: {
+      type: 'category',
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
     },
-  ],
-  animation: true,
-} as EChartsOption
+    yAxis: {
+      type: 'value',
+    },
+    series: [
+      {
+        data: [220, 182, 191, 234, 290, 330, 310],
+        type: 'line',
+      },
+    ],
+    animation: true,
+  },
+  () => {
+    return {
+      xAxis: {
+        data: [
+          'Mon',
+          'Tue',
+          'Wed',
+          'Thu',
+          'Fri',
+          'Sat',
+          'Sun' + Math.floor(Math.random() * 10),
+        ],
+      },
+
+      series: [
+        {
+          data: [
+            220,
+            182,
+            191,
+            234,
+            290,
+            330,
+            Math.floor(Math.random() * 100) + 150,
+          ],
+        },
+      ],
+    }
+  }
+)
