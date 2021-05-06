@@ -12,7 +12,8 @@ export default Listen(
     let seriesData: number[] = prev.series[0].data
 
     const currentTime = new Date(Date.now()).toTimeString().slice(0, 9)
-    let value = await airpurifier.fetch('Air_purifier_123_Aqi')
+    // let value = await airpurifier.fetch('Air_purifier_123_Aqi')
+    let value = 50 + 50 * Math.random()
 
     prevXAxis.push(currentTime)
     seriesData.push(value)

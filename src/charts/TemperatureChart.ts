@@ -11,10 +11,18 @@ export default Listen(
 
     const currentTime = new Date(Date.now()).toTimeString().slice(0, 9)
 
-    let value = await airpurifier.fetch('Air_purifier_123_Temperature')
+    // let value = await airpurifier.fetch('Air_purifier_123_Temperature')
+    let value = 50 + 50 * Math.random()
 
     prevXAxis.push(currentTime)
     seriesData.push(value)
+
+    if (prevXAxis.length > 30) {
+      prevXAxis.shift()
+    }
+    if (seriesData.length > 30) {
+      seriesData.shift()
+    }
 
     return {
       xAxis: {
