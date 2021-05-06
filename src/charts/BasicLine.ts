@@ -1,7 +1,7 @@
 import { Listen } from '@/components/XCharts/listen'
 import { EChartsOption } from 'echarts'
 
-const options:EChartsOption = {
+const options: EChartsOption = {
   xAxis: {
     type: 'category',
     data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -18,38 +18,34 @@ const options:EChartsOption = {
   animation: true,
 }
 
-export default Listen(
-  options,
-  (prev) => {
+export default Listen(options, prev => {
+  console.log(prev)
 
-    console.log(prev)
+  return {
+    xAxis: {
+      data: [
+        'Mon',
+        'Tue',
+        'Wed',
+        'Thu',
+        'Fri',
+        'Sat',
+        'Sun' + Math.floor(Math.random() * 10),
+      ],
+    },
 
-    return {
-      xAxis: {
+    series: [
+      {
         data: [
-          'Mon',
-          'Tue',
-          'Wed',
-          'Thu',
-          'Fri',
-          'Sat',
-          'Sun' + Math.floor(Math.random() * 10),
+          220,
+          182,
+          191,
+          234,
+          290,
+          330,
+          Math.floor(Math.random() * 100) + 150,
         ],
       },
-
-      series: [
-        {
-          data: [
-            220,
-            182,
-            191,
-            234,
-            290,
-            330,
-            Math.floor(Math.random() * 100) + 150,
-          ],
-        },
-      ],
-    }
+    ],
   }
-)
+})
